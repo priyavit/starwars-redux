@@ -1,0 +1,116 @@
+.centre-align-item {
+    display: flex;
+    justify-content: center;
+}
+$sizes: 40px, 50px, 80px;
+
+@each $size in $sizes {
+  .icon-#{$size} {
+    font-size: $size;
+    height: $size;
+    width: $size;
+  }
+}
+
+$black-color : black;
+$font-size-25: 25px;
+
+.font-size-25{
+    font-size:$font-size-25;
+}
+
+.star-war-header{
+    @extend .centre-align-item;
+    font-style: italic;
+    font-weight: bold;
+    color: $black-color;
+    font-size: -webkit-xxx-large;
+    background-color: antiquewhite;
+
+}
+
+.login-credentials{
+    display: grid;
+    justify-content: center;
+    margin-top: 215px;
+    font-size: 25px;
+    height: 20px;
+}
+
+.login-button{
+    @extend .centre-align-item;
+    margin-top: 61px;
+}
+
+.search-bar{
+    width: 10% !important;
+    border-color: $black-color;
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+  }
+
+  .planet-name{
+    justify-content: center;
+    display: flex;
+    color: red;
+    font-weight: bold;
+    font-size: 79px;
+  }
+
+  .planet-details{
+    font-size: 50px;
+    font-family: cursive;
+    color: $black-color;
+  }
+
+  .search-header{
+    width : 66%;
+    font-size: 60px;
+    color: $black-color;
+  }
+
+  .search-text{
+    color: $black-color;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.planet-list{
+    color: dimgrey;
+    font-size: 35px;
+    font-family: cursive;
+}
+
+.back-button{
+    font-size: 20px;
+}
+
+.error-msg{
+    font-size: 40px;
+    color: $black-color;
+}
+
+.table-font{
+    font-size: 30px;
+}
+
+.username{
+    font-size: $font-size-25;
+    margin-left: 36px;
+}
+
+.error-style{
+    color: red;
+    margin-left: 10px;
+}
+
+.login-error{
+  text-align: center;
+    margin-top: 20px;
+    color: red;
+    font-size: 25px;
+}
