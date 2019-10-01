@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import './starwar.scss';
 import { Table, Tbody, Tr, Td } from 'react-super-responsive-table';
 import history from './history';
+import PropTypes from 'prop-types';
 
 
 class PlanetDetails extends Component{
@@ -72,5 +73,16 @@ class PlanetDetails extends Component{
     }
 
 }
+
+PlanetDetails.propTypes = {
+    climate: PropTypes.string.isRequired,
+    created: PropTypes.string.isRequired,
+    diameter: PropTypes.number.isRequired,
+    edited: PropTypes.string.isRequired,
+    gravity: PropTypes.number.isRequired,
+    population: PropTypes.number.isRequired,
+    rotation_period: PropTypes.string.isRequired,
+    terrain: PropTypes.string.isRequired,
+};
 
 export default PlanetDetails;

@@ -1,3 +1,5 @@
+@import './variable.scss';
+
 .centre-align-item {
     display: flex;
     justify-content: center;
@@ -12,8 +14,7 @@ $sizes: 40px, 50px, 80px;
   }
 }
 
-$black-color : black;
-$font-size-25: 25px;
+
 
 .font-size-25{
     font-size:$font-size-25;
@@ -33,7 +34,7 @@ $font-size-25: 25px;
     display: grid;
     justify-content: center;
     margin-top: 215px;
-    font-size: 25px;
+    font-size: $font-size-25;
     height: 20px;
 }
 
@@ -112,5 +113,5 @@ $font-size-25: 25px;
   text-align: center;
     margin-top: 20px;
     color: red;
-    font-size: 25px;
+    font-size: $font-size-25;
 }

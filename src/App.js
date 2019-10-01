@@ -3,45 +3,57 @@ import './starwar.scss';
 import history from './history';
 import { connect } from 'react-redux';
 import { loginUserDetails } from './redux/loginaction';
+import Textbox from './Textbox';
+import ErrorHandler from './ErrorHandler';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      usernameErr : '',
+      passwordErr : '',
+      credentialsErr : ''
     };
 
-    this.saveUsername = this.saveUsername.bind(this);
-    this.savePassword = this.savePassword.bind(this);
-    this.validateUserLogin = this.validateUserLogin.bind(this);
   }
 
   componentDidMount() {
     this.props.getUserDetails();
   }
 
-  saveUsername(event) {
+  saveUsername = (event) => {
     this.setState({ username: event.target.value })
+    this.setState({usernameErr:''});
+    this.setState({credentialsErr:''});
   }
 
-  savePassword(event) {
+  savePassword = (event) => {
+    this.setState({passwordErr:''});
+    this.setState({credentialsErr:''});
     this.setState({ password: event.target.value })
   }
 
-  validateUserLogin(){
+  validateUserLogin = () => {
           const userNames = this.props.userDetails;
           for(var i=0;i<userNames.length;i++){
-            if(userNames[i].name === this.state.username && userNames[i].birth_year === this.state.password){
-                localStorage.setItem('user' , this.state.username);
-                localStorage.setItem('password' , this.state.password);
-                history.push('/details');
-                break;
+            if(this.state.username === '' && this.state.password === ''){
+              this.setState({credentialsErr:'Please enter valid Username/Password'});
+              break;
             }else if(userNames[i].name !== this.state.username){
-                alert('Please enter valid Username');
+                this.setState({usernameErr:'Please enter valid Username'});
                 break;
             }else if(userNames[i].birth_year !== this.state.password){
-              alert('Please enter correct Password');
+              this.setState({passwordErr:'Please enter correct Password'});
+              break;
+            }else if(userNames[i].name === this.state.username && userNames[i].birth_year === this.state.password){
+              this.setState({passwordErr:''});
+              this.setState({usernameErr:''});
+              this.setState({credentialsErr:''});
+              localStorage.setItem('user' , this.state.username);
+              localStorage.setItem('password' , this.state.password);
+              history.push('/details');
               break;
             }
           }
@@ -58,43 +70,32 @@ class App extends Component {
       <div className='login-credentials'>
         <div>
           <span>
-            Login: <input type='text' className='username' placeholder='Enter your Username' onChange={this.saveUsername}></input>
+            Login: <Textbox type='text' className='username' placeholder='Enter your Username'
+             onChange={this.saveUsername}></Textbox>
           </span>
-          <span className='error-style'>
-            {this.state.usernameErr}
-          </span>
+          <ErrorHandler className='error-style' message={this.state.usernameErr}></ErrorHandler>
         </div>
         <div>
           <span>
-          Password: <input type="password" className='font-size-25' name="password" onChange={this.savePassword}></input>
+          Password: <Textbox type="password" className='font-size-25' placeholder='Enter your Password' name="password" onChange={this.savePassword}></Textbox>
           </span>
-          <span className='error-style'>
-            {this.state.passwordErr}
-          </span>
+          <ErrorHandler className='error-style' message={this.state.passwordErr}></ErrorHandler>
         </div>
       </div>
       <div className='login-button'>
         <button type='submit' onClick={this.validateUserLogin}>Login</button>
       </div>
-      <div className='login-error'>
-        {this.state.credentialsErr}
-      </div>
+      <ErrorHandler className='login-error' message={this.state.credentialsErr}></ErrorHandler>
     </>
     ); 
   }
 }
-
-function mapStateToProps(state) {
-  console.log('State:', state);
-  return {
+const mapStateToProps = (state) => ({
     userDetails: state.login.userDetails
-  }
-}
+})
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getUserDetails: () => dispatch(loginUserDetails())
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  getUserDetails: () => dispatch(loginUserDetails())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
