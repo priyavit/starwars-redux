@@ -56,7 +56,7 @@ $sizes: 40px, 50px, 80px;
   .planet-name{
     justify-content: center;
     display: flex;
-    color: red;
+    color: $color-red;
     font-weight: bold;
     font-size: 79px;
   }
@@ -105,13 +105,14 @@ $sizes: 40px, 50px, 80px;
 }
 
 .error-style{
-    color: red;
+    color: $color-red;
     margin-left: 10px;
 }
 
 .login-error{
   text-align: center;
     margin-top: 20px;
-    color: red;
+    color: $color-red;
     font-size: $font-size-25;
+    display:block;
 }

@@ -85,4 +85,15 @@ PlanetDetails.propTypes = {
     terrain: PropTypes.string.isRequired,
 };
 
+PlanetDetails.defaultProps = {
+    climate: '',
+    created: '',
+    diameter: '',
+    edited: '',
+    gravity: '',
+    population: '',
+    rotation_period: '',
+    terrain: '',
+};
+
 export default PlanetDetails;

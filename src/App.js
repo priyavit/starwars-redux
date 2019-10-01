@@ -24,15 +24,11 @@ class App extends Component {
   }
 
   saveUsername = (event) => {
-    this.setState({ username: event.target.value })
-    this.setState({usernameErr:''});
-    this.setState({credentialsErr:''});
+    this.setState({ username: event.target.value,usernameErr:'',credentialsErr:''})
   }
 
   savePassword = (event) => {
-    this.setState({passwordErr:''});
-    this.setState({credentialsErr:''});
-    this.setState({ password: event.target.value })
+    this.setState({passwordErr:'',credentialsErr:'',password: event.target.value});
   }
 
   validateUserLogin = () => {
@@ -42,17 +38,15 @@ class App extends Component {
               this.setState({credentialsErr:'Please enter valid Username/Password'});
               break;
             }else if(userNames[i].name !== this.state.username){
+              debugger;
                 this.setState({usernameErr:'Please enter valid Username'});
                 break;
             }else if(userNames[i].birth_year !== this.state.password){
               this.setState({passwordErr:'Please enter correct Password'});
               break;
             }else if(userNames[i].name === this.state.username && userNames[i].birth_year === this.state.password){
-              this.setState({passwordErr:''});
-              this.setState({usernameErr:''});
-              this.setState({credentialsErr:''});
-              localStorage.setItem('user' , this.state.username);
-              localStorage.setItem('password' , this.state.password);
+              this.setState({passwordErr:'',usernameErr:'',credentialsErr:''});
+              localStorage.setItem('user' , this.state.username,'password' , this.state.password);
               history.push('/details');
               break;
             }
@@ -71,13 +65,13 @@ class App extends Component {
         <div>
           <span>
             Login: <Textbox type='text' className='username' placeholder='Enter your Username'
-             onChange={this.saveUsername}></Textbox>
+             changeHandler={this.saveUsername}></Textbox>
           </span>
           <ErrorHandler className='error-style' message={this.state.usernameErr}></ErrorHandler>
         </div>
         <div>
           <span>
-          Password: <Textbox type="password" className='font-size-25' placeholder='Enter your Password' name="password" onChange={this.savePassword}></Textbox>
+          Password: <Textbox type="password" className='font-size-25' placeholder='Enter your Password' name="password" changeHandler={this.savePassword}></Textbox>
           </span>
           <ErrorHandler className='error-style' message={this.state.passwordErr}></ErrorHandler>
         </div>

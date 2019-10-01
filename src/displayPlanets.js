@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link} from 'react-router-dom';
+import ErrorHandler from './ErrorHandler';
 
 const DisplayPlanets = (props) => {
   const planets = props.planet.map((planet) =>
@@ -10,11 +11,11 @@ const DisplayPlanets = (props) => {
         );
         if(props.planet.length === 0 && props.isSearchInitiated){
           return(
-            <p className='error-msg'>Oops!! No planets found</p>
+            <ErrorHandler className='error-msg' message='Oops!! No planets found'></ErrorHandler>
         );
         }else{
           return(
-            <ul>{planets}</ul>        
+            <ul>{planets}</ul>
         );
         }   
 }

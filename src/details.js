@@ -3,6 +3,7 @@ import './starwar.scss';
 import DisplayPlanets from './displayPlanets';
 import {getPlanetDetails} from './redux/planetaction';
 import { connect } from 'react-redux';
+import Textbox from './Textbox';
 
 class  Details extends Component{
     constructor(props){
@@ -12,7 +13,6 @@ class  Details extends Component{
             filteredArray : [],
             isSearchInitiated: false
     };
-        this.planetList = this.planetList.bind(this);
         
     }
 
@@ -20,7 +20,7 @@ class  Details extends Component{
         this.props.getPlanetDetails();
     }
 
-    planetList(event){
+    planetList = (event) =>{
         this.setState({ isSearchInitiated: true });
         const planets = this.props.planetDetails;
         const {value} = event.target;
@@ -44,7 +44,8 @@ class  Details extends Component{
             <>
             <form>
                 <p className='search-header'>Enter the planet to be Searched</p>
-                <input className='search-text' type='textbox' placeholder='Planet' onChange={this.planetList}></input>
+                <Textbox className='search-text' type='textbox' placeholder='Planet' 
+                changeHandler={this.planetList}></Textbox>
                 <DisplayPlanets planet={this.state.filteredArray} isSearchInitiated={this.state.isSearchInitiated}></DisplayPlanets>
             </form>
             

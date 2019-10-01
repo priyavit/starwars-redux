@@ -6,7 +6,7 @@ export const getPlanetDetails = () => {
         .then(res => res.json())
         .then(json => {
           dispatch({
-            type: myConst.user_details,
+            type: myConst.planet_details,
             payload: json.results
           });
         });
